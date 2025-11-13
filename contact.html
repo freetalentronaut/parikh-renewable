@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Parikh Renewable</title>
+  <meta name="description" content="Parikh Renewable — rooftop solar, EPC, KCDB/DCDB manufacturing, electrical & civil contracting. Request a site survey." />
+  <meta name="author" content="Parikh Renewable Pvt Ltd" />
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Roboto:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { inter: ['Inter','system-ui','sans-serif'], roboto: ['Roboto', 'sans-serif'], montserrat: ['Montserrat', 'sans-serif'] },
+          colors: {
+            prblue: { 50:'#f2f7fb', 300:'#4b78a0', 500:'#133b5a', 700:'#0f2b3e' },
+            prgold: { 50:'#fff8ec', 300:'#ecc27a', 500:'#e5aa28', 700:'#b07e1b' }
+          },
+          boxShadow: { 'soft-lg':'0 18px 50px rgba(8,12,20,0.45)', 'glow-gold':'0 8px 28px rgba(229,170,40,0.12)' },
+          keyframes: {
+            floaty: {'0%':{transform:'translateY(0)'}, '50%':{transform:'translateY(-8px)'}, '100%':{transform:'translateY(0)'}},
+            shine: {'0%':{backgroundPosition:'0% 50%'}, '100%':{backgroundPosition:'200% 50%'}},
+            slideIn:{'0%':{opacity:0, transform:'translateY(14px)'},'100%':{opacity:1, transform:'translateY(0)'}},
+            fadeInUp: {'0%':{opacity:0, transform:'translateY(20px)'}, '100%':{opacity:1, transform:'translateY(0)'}},
+            pulseGlow: {'0%':{boxShadow:'0 0 0 0 rgba(229,170,40,0.4)'}, '70%':{boxShadow:'0 0 0 10px rgba(229,170,40,0)'}, '100%':{boxShadow:'0 0 0 0 rgba(229,170,40,0)'}}
+          },
+          animation: { floaty:'floaty 6s ease-in-out infinite', shine:'shine 6s linear infinite', slideIn:'slideIn .7s ease forwards', fadeInUp:'fadeInUp 1s ease forwards', pulseGlow:'pulseGlow 2s infinite' }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root{ --nav-bg: rgba(8,12,20,0.6); --glass: rgba(255,255,255,0.03); }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: linear-gradient(180deg,#f7f9fb 0%, #eef6fb 100%); color:#08121a; }
+
+    /* NAV / progress */
+    #scrollProgress { position: fixed; left:0; top:0; height:3px; background:linear-gradient(90deg,#e5aa28,#133b5a); width:0; z-index:60; transition:width .2s linear; }
+
+    /* glass cards */
+    .glass { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.04); border-radius:12px; backdrop-filter: blur(6px); }
+
+    .underline-anim { position:relative; display:inline-block; }
+    .underline-anim::after { content:''; position:absolute; left:0; bottom:-6px; width:0; height:3px; background:#e5aa28; transition:width .28s ease; border-radius:2px; }
+    .underline-anim:hover::after{ width:100%; }
+
+
+
+    /* reveal */
+    .reveal { opacity:0; transform:translateY(8px); transition:opacity .6s ease, transform .6s ease; }
+    .reveal.show { opacity:1; transform:translateY(0); }
+
+    /* modal */
+    .modal-backdrop { background: rgba(0,0,0,0.6); position:fixed; inset:0; display:grid; place-items:center; z-index:120; }
+    /* testimonials */
+    .test-card{ transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .25s; }
+    .test-card:hover{ transform: translateY(-6px) scale(1.01); box-shadow: 0 20px 40px rgba(8,12,20,0.18); }
+
+    /* counters */
+    .count { font-weight:700; color:#0f2b3e; font-size:1.6rem; }
+
+    /* small screens nav style */
+    @media (max-width:1023px){
+      .hero-image { height:380px; object-fit:cover; border-bottom-left-radius:18px; border-bottom-right-radius:18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      * { animation:none !important; transition:none !important; }
+    }
+
+    /* Loading animation */
+    .loading { position: fixed; inset: 0; background: #f7f9fb; display: flex; align-items: center; justify-content: center; z-index: 9999; }
+    .loading.hidden { display: none; }
+    .spinner { width: 50px; height: 50px; border: 4px solid #e5aa28; border-top: 4px solid transparent; border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    /* Back to Top */
+    .back-to-top { position: fixed; bottom: 100px; right: 20px; background: #e5aa28; color: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: opacity 0.3s; z-index: 100; }
+    .back-to-top.show { opacity: 1; }
+
+    /* Form styles */
+    .form-input { background: rgba(255,255,255,0.8); border:1px solid rgba(0,0,0,0.1); border-radius:8px; padding:12px; font-size:14px; transition: border-color 0.3s; }
+    .form-input:focus { outline:none; border-color:#e5aa28; box-shadow: 0 0 0 3px rgba(229,170,40,0.1); }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Loading Screen -->
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- scroll progress -->
+  <div id="scrollProgress" aria-hidden="true"></div>
+
+
+
+  <!-- NAV -->
+  <header id="siteHeader" class="sticky top-0 z-50" style="background:var(--nav-bg); backdrop-filter: blur(6px);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center gap-3">
+          <img src="companylogo.jpg" alt="Parikh Renewable" class="h-14 w-14 object-contain rounded-md shadow" onerror="this.onerror=null; this.src='/mnt/data/dd327884-a9b6-4447-a3fc-e7f0ccc19528.jpg'">
+          <div>
+            <div class="text-white font-semibold text-lg">Parikh Renewable</div>
+            <div class="text-xs text-white/70 -mt-0.5">Rooftop & EPC Solutions</div>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-6 text-sm text-white/90">
+          <a href="index.html" class="hover:text-white">Home</a>
+          <a href="services.html" class="hover:text-white">Services</a>
+          <a href="projects.html" class="hover:text-white">Projects</a>
+          <a href="manufacturing.html" class="hover:text-white">Manufacturing</a>
+          <a href="about.html" class="hover:text-white">About</a>
+          <a href="contact.html" class="hover:text-white underline-anim">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <a href="https://wa.me/919XXXXXXXXX" target="_blank" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500 text-white text-sm">WhatsApp</a>
+          <a href="contact.html" class="hidden md:inline-flex px-4 py-2 rounded-full bg-gradient-to-r from-prgold-500 to-prgold-300 text-slate-900 font-semibold shadow-glow">Request Quote</a>
+
+          <button id="mobileToggle" class="lg:hidden p-2 rounded-md border border-white/10 text-white" aria-label="Toggle menu" aria-expanded="false">
+            <svg id="menuOpen" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg id="menuClose" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- mobile menu -->
+      <div id="mobileMenu" class="lg:hidden hidden pb-6">
+        <div class="pt-3 flex flex-col gap-2">
+          <a href="index.html" class="px-3 py-2 rounded-md hover:bg-white/5 text-white">Home</a>
+          <a href="services.html" class="px-3 py-2 rounded-md hover:bg-white/5 text-white">Services</a>
+          <a href="projects.html" class="px-3 py-2 rounded-md hover:bg-white/5 text-white">Projects</a>
+          <a href="manufacturing.html" class="px-3 py-2 rounded-md hover:bg-white/5 text-white">Manufacturing</a>
+          <a href="about.html" class="px-3 py-2 rounded-md hover:bg-white/5 text-white">About</a>
+          <a href="contact.html" class="px-3 py-2 rounded-md hover:bg-white/5 text-white">Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-16" style="background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('blueyellow.jpg'); background-size: cover; background-position: center;">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8" data-aos="fadeInUp">
+        <h1 class="text-4xl font-bold font-playfair">Contact Us</h1>
+        <p class="text-lg text-gray-600 mt-4">Get in touch for a free site survey or quote</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Form -->
+        <div data-aos="fade-right" class="glass p-6 rounded-2xl">
+          <form id="contactForm" class="space-y-4">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+              <input type="text" id="name" name="name" class="form-input w-full" required>
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+              <input type="email" id="email" name="email" class="form-input w-full" required>
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+              <input type="tel" id="phone" name="phone" class="form-input w-full">
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+              <textarea id="message" name="message" rows="4" class="form-input w-full" placeholder="Tell us about your project..."></textarea>
+            </div>
+            <button type="submit" class="w-full px-4 py-2 rounded-md bg-prgold-500 text-slate-900 font-semibold hover:bg-prgold-600 transition-colors">Send Message</button>
+          </form>
+        </div>
+
+        <!-- Details -->
+        <div data-aos="fade-left" class="space-y-6">
+          <div class="glass p-6 rounded-2xl">
+            <h3 class="text-xl font-semibold font-playfair">Get a Free Site Survey</h3>
+            <p class="text-gray-600 mt-2">Our experts will visit your location to assess solar potential and provide a customized solution.</p>
+            <a href="tel:+919XXXXXXXXX" class="inline-block mt-3 px-4 py-2 rounded-md bg-prblue-500 text-white font-semibold">Call Now</a>
+          </div>
+
+          <div class="glass p-6 rounded-2xl">
+            <h3 class="text-xl font-semibold font-playfair">Office Address</h3>
+            <p class="text-gray-600 mt-2">Parikh Renewable Pvt Ltd<br>123 Solar Street<br>Green City, India 400001</p>
+          </div>
+
+          <div class="glass p-6 rounded-2xl">
+            <h3 class="text-xl font-semibold font-playfair">Contact Info</h3>
+            <p class="text-gray-600 mt-2">
+              Email: <a href="mailto:info@parikhrenewable.com" class="text-prblue-500 underline">info@parikhrenewable.com</a><br>
+              Phone: <a href="tel:+919XXXXXXXXX" class="text-prblue-500 underline">+91 9XXXXXXXXX</a><br>
+              WhatsApp: <a href="https://wa.me/919XXXXXXXXX" target="_blank" class="text-green-500 underline">+91 9XXXXXXXXX</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
+  <!-- FOOTER -->
+  <footer class="bg-prblue-700 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div>
+          <img src="companylogo.jpg" alt="Parikh Renewable" class="h-14 w-14 object-contain rounded-md bg-white/5 p-2" onerror="this.onerror=null; this.src='/mnt/data/dd327884-a9b6-4447-a3fc-e7f0ccc19528.jpg'">
+          <p class="text-sm text-white/80 mt-3">Parikh Renewable Pvt Ltd — rooftop install, EPC services and DC combiner manufacturing.</p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold">Quick Links</h4>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li><a href="index.html" class="hover:underline">Home</a></li>
+            <li><a href="services.html" class="hover:underline">Services</a></li>
+            <li><a href="projects.html" class="hover:underline">Projects</a></li>
+            <li><a href="manufacturing.html" class="hover:underline">Manufacturing</a></li>
+            <li><a href="contact.html" class="hover:underline">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold">Contact</h4>
+          <p class="text-sm text-white/80 mt-3">Email: <a href="mailto:info@parikhrenewable.com" class="underline">info@parikhrenewable.com</a></p>
+          <p class="text-sm text-white/80">Phone: <a href="tel:+919XXXXXXXXX" class="underline">+91 9XXXXXXXXX</a></p>
+        </div>
+      </div>
+
+      <div class="mt-8 border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/80">
+        <div>© <span id="year"></span> Parikh Renewable Private Limited — All rights reserved.</div>
+        <div>Designed by <a href="https://www.talentronaut.in/" target="_blank" rel="noopener" class="underline">Talentronaut Technologies</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Hide loading after page load
+    window.addEventListener('load', () => {
+      document.getElementById('loading').classList.add('hidden');
+    });
+
+    AOS.init({ duration:700, once:true, offset:80 });
+
+    // Header shrink effect + progress bar
+    const header = document.getElementById('siteHeader');
+    const progress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const sc = window.scrollY;
+      if(sc > 40) header.style.backdropFilter = 'blur(8px)';
+      else header.style.backdropFilter = 'blur(4px)';
+
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = (window.scrollY / docH) * 100;
+      progress.style.width = pct + '%';
+    });
+
+    // mobile menu toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuOpen = document.getElementById('menuOpen');
+    const menuClose = document.getElementById('menuClose');
+    mobileToggle?.addEventListener('click', () => {
+      const open = mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', !open);
+      menuOpen.classList.toggle('hidden', open);
+      menuClose.classList.toggle('hidden', !open);
+      mobileToggle.setAttribute('aria-expanded', String(open));
+    });
+
+    // Reveal on scroll fallback for .reveal (works with AOS too)
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => io.observe(r));
+
+    // Form submission (basic)
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your message! We will get back to you soon.');
+      e.target.reset();
+    });
+
+    // Back to Top
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // helpful: set year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
