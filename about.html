@@ -37,9 +37,15 @@
             bounce: {'0%,100%':{transform:'translateY(0)'}, '50%':{transform:'translateY(-10px)'}},
             rotate: {'0%':{transform:'rotate(0deg)'}, '100%':{transform:'rotate(360deg)'}},
             parallax: {'0%':{transform:'translateY(0)'}, '100%':{transform:'translateY(-50px)'}},
-            countUp: {'0%':{content:'0'}, '100%':{content:'var(--num)'}}
+            countUp: {'0%':{content:'0'}, '100%':{content:'var(--num)'}},
+            floatSlow: {'0%,100%':{transform:'translateY(0px)'}, '50%':{transform:'translateY(-20px)'}},
+            fadeInScale: {'0%':{opacity:0, transform:'scale(0.8)'}, '100%':{opacity:1, transform:'scale(1)'}},
+            slideInLeft: {'0%':{opacity:0, transform:'translateX(-50px)'}, '100%':{opacity:1, transform:'translateX(0)'}},
+            slideInRight: {'0%':{opacity:0, transform:'translateX(50px)'}, '100%':{opacity:1, transform:'translateX(0)'}},
+            glowPulse: {'0%,100%':{boxShadow:'0 0 20px rgba(229,170,40,0.3)'}, '50%':{boxShadow:'0 0 40px rgba(229,170,40,0.6)'}},
+            backgroundFloat: {'0%,100%':{backgroundPosition:'0% 50%'}, '50%':{backgroundPosition:'100% 50%'}}
           },
-          animation: { floaty:'floaty 6s ease-in-out infinite', shine:'shine 6s linear infinite', slideIn:'slideIn .7s ease forwards', fadeInUp:'fadeInUp 1s ease forwards', pulseGlow:'pulseGlow 2s infinite', bounce:'bounce 2s infinite', rotate:'rotate 4s linear infinite', parallax:'parallax 10s ease-in-out infinite' }
+          animation: { floaty:'floaty 6s ease-in-out infinite', shine:'shine 6s linear infinite', slideIn:'slideIn .7s ease forwards', fadeInUp:'fadeInUp 1s ease forwards', pulseGlow:'pulseGlow 2s infinite', bounce:'bounce 2s infinite', rotate:'rotate 4s linear infinite', parallax:'parallax 10s ease-in-out infinite', floatSlow:'floatSlow 8s ease-in-out infinite', fadeInScale:'fadeInScale 0.8s ease forwards', slideInLeft:'slideInLeft 0.8s ease forwards', slideInRight:'slideInRight 0.8s ease forwards', glowPulse:'glowPulse 3s ease-in-out infinite', backgroundFloat:'backgroundFloat 15s ease infinite' }
         }
       }
     }
@@ -178,20 +184,20 @@
   <!-- ABOUT -->
   <section id="about" class="py-16" style="background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('blueyellow.jpg'); background-size: cover; background-position: center;">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-8" data-aos="fadeInUp">
-        <h1 class="text-4xl font-bold font-playfair">About Parikh Renewable</h1>
-        <p class="text-lg text-gray-600 mt-4">Leading the way in sustainable energy solutions with expertise in rooftop solar installations and manufacturing.</p>
+      <div class="text-center mb-8" data-aos="fadeInScale">
+        <h1 class="text-4xl font-bold font-playfair animate-floatSlow">About Parikh Renewable</h1>
+        <p class="text-lg text-gray-600 mt-4" data-aos="fadeInUp" data-aos-delay="200">Leading the way in sustainable energy solutions with expertise in rooftop solar installations and manufacturing.</p>
       </div>
 
       <div class="grid lg:grid-cols-2 gap-8 items-center mb-16">
-        <div data-aos="fade-right" class="reveal">
-          <h2 class="text-3xl font-bold font-playfair">Our Story</h2>
-          <p class="text-gray-600 mt-3">Founded with a vision to accelerate India's transition to renewable energy, Parikh Renewable has been at the forefront of rooftop solar solutions for over a decade. We combine engineering excellence with customer-centric service to deliver reliable, efficient solar systems.</p>
-          <p class="text-gray-600 mt-3">Our team of certified engineers and technicians ensures every project meets the highest standards of safety, performance, and compliance. From initial consultation to long-term maintenance, we're committed to your energy independence.</p>
+        <div data-aos="slideInLeft" class="reveal">
+          <h2 class="text-3xl font-bold font-playfair" data-aos="fadeInUp">Our Story</h2>
+          <p class="text-gray-600 mt-3" data-aos="fadeInUp" data-aos-delay="100">Founded with a vision to accelerate India's transition to renewable energy, Parikh Renewable has been at the forefront of rooftop solar solutions for over a decade. We combine engineering excellence with customer-centric service to deliver reliable, efficient solar systems.</p>
+          <p class="text-gray-600 mt-3" data-aos="fadeInUp" data-aos-delay="200">Our team of certified engineers and technicians ensures every project meets the highest standards of safety, performance, and compliance. From initial consultation to long-term maintenance, we're committed to your energy independence.</p>
         </div>
 
-        <div data-aos="fade-left" class="reveal">
-          <div class="glass rounded-2xl p-4">
+        <div data-aos="slideInRight" class="reveal">
+          <div class="glass rounded-2xl p-4 animate-floatSlow">
             <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1400&auto=format&fit=crop" alt="about" class="w-full h-64 object-cover rounded-lg" loading="lazy">
           </div>
         </div>
@@ -199,19 +205,19 @@
 
       <!-- Stats -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-        <div data-aos="fade-up" class="glass p-6 rounded-2xl text-center">
+        <div data-aos="fadeInScale" class="glass p-6 rounded-2xl text-center animate-glowPulse">
           <div class="text-3xl font-bold font-playfair text-prblue-500">12+</div>
           <div class="text-sm text-gray-600 mt-2">Years Experience</div>
         </div>
-        <div data-aos="fade-up" data-aos-delay="40" class="glass p-6 rounded-2xl text-center">
+        <div data-aos="fadeInScale" data-aos-delay="100" class="glass p-6 rounded-2xl text-center animate-glowPulse">
           <div class="text-3xl font-bold font-playfair text-prgold-500">300+</div>
           <div class="text-sm text-gray-600 mt-2">Projects Completed</div>
         </div>
-        <div data-aos="fade-up" data-aos-delay="80" class="glass p-6 rounded-2xl text-center">
+        <div data-aos="fadeInScale" data-aos-delay="200" class="glass p-6 rounded-2xl text-center animate-glowPulse">
           <div class="text-3xl font-bold font-playfair text-prblue-500">500+</div>
           <div class="text-sm text-gray-600 mt-2">Happy Partners</div>
         </div>
-        <div data-aos="fade-up" data-aos-delay="120" class="glass p-6 rounded-2xl text-center">
+        <div data-aos="fadeInScale" data-aos-delay="300" class="glass p-6 rounded-2xl text-center animate-glowPulse">
           <div class="text-3xl font-bold font-playfair text-prgold-500">24/7</div>
           <div class="text-sm text-gray-600 mt-2">Support Available</div>
         </div>
@@ -222,16 +228,16 @@
   <!-- TESTIMONIALS CAROUSEL -->
   <section id="testimonials" class="py-16 bg-slate-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-8">
+      <div class="text-center mb-8" data-aos="fadeInUp">
         <h2 class="text-2xl font-bold font-playfair">What clients say</h2>
         <p class="text-sm text-gray-500 mt-2">Real feedback from our partners and customers</p>
       </div>
 
-      <div class="relative">
+      <div class="relative" data-aos="fadeInUp" data-aos-delay="200">
         <div id="testimonialsContainer" class="overflow-hidden">
           <!-- slides -->
           <div class="flex gap-6 transition-transform duration-600 ease-in-out" style="will-change:transform;">
-            <blockquote class="min-w-full glass p-6 rounded-2xl test-card">
+            <blockquote class="min-w-full glass p-6 rounded-2xl test-card" data-aos="slideInLeft" data-aos-delay="300">
               <div class="flex items-start gap-4">
                 <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop" alt="Priya Sharma" class="w-20 h-20 object-cover rounded-full">
                 <div>
@@ -241,7 +247,7 @@
               </div>
             </blockquote>
 
-            <blockquote class="min-w-full glass p-6 rounded-2xl test-card">
+            <blockquote class="min-w-full glass p-6 rounded-2xl test-card" data-aos="slideInRight" data-aos-delay="400">
               <div class="flex items-start gap-4">
                 <img src="https://images.unsplash.com/photo-1545996124-1b4f9b1f6b58?q=80&w=600&auto=format&fit=crop" alt="Client 3" class="w-20 h-20 object-cover rounded-full">
                 <div>
@@ -254,7 +260,7 @@
         </div>
 
         <!-- controls -->
-        <div class="mt-4 flex items-center justify-center gap-3">
+        <div class="mt-4 flex items-center justify-center gap-3" data-aos="fadeInUp" data-aos-delay="500">
           <button id="prevTest" class="px-3 py-2 rounded-md border border-slate-200">Prev</button>
           <div id="dots" class="flex gap-2"></div>
           <button id="nextTest" class="px-3 py-2 rounded-md border border-slate-200">Next</button>
@@ -431,4 +437,3 @@
   </script>
 </body>
 </html>
-
